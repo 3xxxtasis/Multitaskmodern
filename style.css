@@ -1,0 +1,103 @@
+/* Estilos por defecto para el encabezado */
+header {
+    background-color: #212121; /* Color de fondo del encabezado */
+    color: white; /* Color del texto */
+    padding: 10px; /* Espaciado interno del encabezado */
+    text-align: center; /* Alineación del texto en el centro */
+    display: flex; /* Cambio a flexbox para centrar verticalmente */
+    align-items: center; /* Centra el logo y el texto verticalmente */
+}
+
+header img {
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantiene la proporción */
+    margin-right: 10px; /* Agrega espacio entre el logo y el texto */
+}
+
+/* Estilos para los contenedores */
+.container {
+    max-width: 800px; /* Ancho máximo para los contenedores */
+    margin: 0 auto; /* Centra los contenedores horizontalmente */
+    padding: 0 20px; /* Añade relleno a los lados */
+}
+
+/* Estilos comunes para la lista de tareas y la sección FAQ */
+.todo-list, .faq {
+    width: 50%; /* Ancho del 50% para que los contenedores se vean más proporcionados */
+    padding: 20px; /* Espaciado interno */
+    margin: 10px 0; /* Agrega margen vertical entre los contenedores */
+    border: 1px solid #ccc; /* Borde delgado de color gris */
+    box-sizing: border-box; /* Incluye relleno y borde en el cálculo del ancho */
+}
+
+.todo-list h2, .faq h2 {
+    text-align: center; /* Alineación del texto en el centro */
+}
+
+/* Estilos específicos para la lista de tareas */
+.todo-list input[type="text"] {
+    width: 70%; /* Ancho del 70% para el campo de entrada de texto */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+.todo-list button, .faq button[type="submit"] {
+    padding: 10px 20px; /* Espaciado interno del botón */
+    background-color: #4CAF50; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.todo-list button:hover, .faq button[type="submit"]:hover {
+    background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+}
+
+/* Estilos específicos para la calculadora */
+.calculator {
+    width: 50%; /* Ancho del 50% para la calculadora */
+    padding: 20px; /* Espaciado interno */
+    margin: 10px 0; /* Agrega margen vertical */
+    border: 1px solid #ccc; /* Borde delgado de color gris */
+    box-sizing: border-box; /* Incluye relleno y borde en el cálculo del ancho */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+.calculator input[type="text"] {
+    width: 100%; /* Ancho del 70% para el campo de entrada de texto */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+.calculator .buttons {
+    margin-bottom: 20px; /* Agrega margen inferior a los botones */
+}
+
+.calculator #calculatorInput {
+    margin-bottom: 10px; /* Agrega margen inferior al campo de entrada */
+}
+
+/* Estilos específicos para la sección FAQ */
+.faq {
+    width: 75%; /* Ancho del 75% para que los contenedores se vean más proporcionados */
+    padding: 20px; /* Espaciado interno */
+    margin: 10px auto; /* Centra el contenedor horizontalmente */
+    border: 1px solid #ccc; /* Borde delgado de color gris */
+    box-sizing: border-box; /* Incluye relleno y borde en el cálculo del ancho */
+}
+
+.faq h2 {
+    text-align: center; /* Alineación del texto en el centro */
+}
+
+.faq form {
+    text-align: center; /* Alineación del formulario en el centro */
+}
+
+.faq input[type="text"],
+.faq textarea,
+.faq button[type="submit"] {
+    width: 70%; /* Ancho del 70% para los campos de entrada y el botón */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+}

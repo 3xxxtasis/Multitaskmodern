@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List with Calculator and Sticky Notes</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.snow.css" rel="stylesheet" />
+<style>
+    /* Estilos por defecto */
+    header {
+    background-color: #ffffff; /* Color de fondo del encabezado */
+    color: rgb(0, 0, 0); /* Color del texto */
+    padding: 10px; /* Espaciado interno del encabezado */
+    text-align: center; /* Alineación del texto en el centro */
+    display: flex; /* Utilizar flexbox para centrar elementos */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+
+    header img {
+        width: 10%; /* Ajusta el tamaño según sea necesario */
+        height: auto; /* Mantiene la proporción */
+        margin-right: 10px; /* Agrega espacio entre el logo y el texto */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column; /* Stack containers vertically on small screens */
+        align-items: center; /* Center containers horizontally */
+    }
+
+    .todo-list, .calculator, .sticky-notes, .faq {
+        width: 75%; /* Ancho del 75% para los contenedores */
+        padding: 20px; /* Espaciado interno */
+        margin: 10px 0; /* Agrega margen vertical entre los contenedores */
+        border: 1px solid #ccc; /* Borde delgado de color gris */
+    }
+
+    .todo-list h2, .calculator h2, .sticky-notes h2, .faq h2 {
+        text-align: center; /* Alineación del texto en el centro */
+    }
+
+    .todo-list input[type="text"] {
+    width: 90%; /* Ancho del 70% para el campo de entrada de texto */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+    margin: 0 auto; /* Centra el campo de entrada horizontalmente */
+    display: block; /* Cambia la visualización a bloque para que ocupe todo el ancho disponible */
+}
+
+    .todo-list button {
+        padding: 10px 20px; /* Espaciado interno del botón */
+        background-color: #4CAF50; /* Color de fondo del botón */
+        color: white; /* Color del texto */
+        margin: 0 auto; /* Centra el botón horizontalmente */
+        display: block; /* Cambia la visualización a bloque para que ocupe todo el ancho disponible */
+}
+
+    .todo-list button:hover {
+        background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+    }
+
+    .sticky-notes #editor {
+        width: 100%; /* Ancho completo del editor */
+        height: 300px; /* Altura del editor */
+        border: 1px solid #ccc; /* Borde delgado de color gris */
+    }
+
+    /* Estilos adicionales para la calculadora */
+    .calculator {
+        text-align: center; /* Centra el contenido horizontalmente */
+    }
+
+    .calculator input[type="text"] {
+        width: 90%; /* Ancho del 70% para el campo de entrada de texto */
+        padding: 10px; /* Espaciado interno */
+        margin-bottom: 10px; /* Margen inferior */
+    }
+
+    .calculator .buttons {
+        margin-bottom: 20px; /* Agrega margen inferior a los botones */
+    }
+
+    .calculator #calculatorInput {
+        margin-bottom: 10px; /* Agrega margen inferior al campo de entrada */
+    }
+
+    /* Estilos adicionales para la sección FAQ */
+    .faq {
+        width: 75%; /* Ancho del 50% para que los contenedores se vean más proporcionados */
+        padding: 20px; /* Espaciado interno */
+        margin: 10px 0; /* Agrega margen vertical entre los contenedores */
+        border: 1px solid #ccc; /* Borde delgado de color gris */
+    }
+
+    .faq h2 {
+        text-align: center; /* Alineación del texto en el centro */
+    }
+
+.faq input[type="text"],
+.faq textarea {
+    width: 90%; /* Ancho del 70% para los campos de entrada de texto y el área de texto */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+}
+.faq button[type="submit"] {
+    padding: 10px 20px; /* Espaciado interno del botón */
+    background-color: #4CAF50; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    display: block; /* Cambia la visualización a bloque para que ocupe todo el ancho disponible */
+}
+
+    .faq button[type="submit"]:hover {
+        background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    }
+</style>
+</head>
+<body>
+<header>
+    <img src="src/logo.webp" alt="Logo">
+    <h1>To-Do List </h1> <!-- Título del encabezado -->
+</header>
+
+<div class="container">
+    <div class="todo-list">
+        <h2>Task List</h2> <!-- Título de la lista de tareas -->
+        <input type="text" id="taskInput" placeholder="Add new task"> <!-- Campo de entrada de texto para agregar una nueva tarea -->
+        <button onclick="addTask()">Add</button> <!-- Botón para agregar tarea -->
+        <ul id="taskList"></ul> <!-- Lista de tareas -->
+        <button onclick="completeSelected()">Mark as Completed Task</button> <!-- Botón para marcar tareas como completadas -->
+    </div>
+    <div class="calculator">
+        <h2>Calculator</h2> <!-- Título de la calculadora -->
+        <input type="text" id="calculatorInput" readonly> <!-- Campo de entrada de texto para la calculadora -->
+        <div class="buttons">
+            <button onclick="appendToCalculator('7')">7</button>
+            <button onclick="appendToCalculator('8')">8</button>
+            <button onclick="appendToCalculator('9')">9</button>
+            <button onclick="appendToCalculator('+')">+</button>
+            <br>
+            <button onclick="appendToCalculator('4')">4</button>
+            <button onclick="appendToCalculator('5')">5</button>
+            <button onclick="appendToCalculator('6')">6</button>
+            <button onclick="appendToCalculator('-')">-</button>
+            <br>
+            <button onclick="appendToCalculator('1')">1</button>
+            <button onclick="appendToCalculator('2')">2</button>
+            <button onclick="appendToCalculator('3')">3</button>
+            <button onclick="appendToCalculator('*')">*</button>
+            <br>
+            <button onclick="appendToCalculator('0')">0</button>
+            <button onclick="appendToCalculator('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToCalculator('/')">/</button>
+            <br>
+            <button onclick="clearCalculator()">C</button>
+            <button onclick="addCalculation()">Save</button> <!-- Botón Agregar -->
+        </div>
+    </div>
+    <div class="sticky-notes">
+        <h2>Sticky Notes</h2> <!-- Título de las notas adhesivas -->
+        <div id="editor">
+          <p>Please enter your text!</p> <!-- Texto predeterminado en el editor -->
+          <p>Some initial <strong>bold</strong> text</p>
+          <p><br /></p>
+        </div>
+    </div>
+    <!-- <div class="faq">
+        <h2>FAQ Section</h2>  Título de la sección de preguntas frecuentes 
+        <form id="faqForm">
+            <label for="question">Question:</label>
+            <input type="text" id="question" name="question" required>
+            <br>
+            <label for="response">Response:</label>
+            <textarea id="response" name="response" rows="4" required></textarea>
+            <br>
+            <button type="submit">Submit Question</button>
+        </form>
+    </div> -->
+</div>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+<script>
+  const quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+</script>
+
+<!-- Google Tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ8R59Q4K3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CZ8R59Q4K3');
+</script>
+
+</body>
+</html>
